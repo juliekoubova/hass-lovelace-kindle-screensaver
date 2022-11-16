@@ -1,4 +1,4 @@
-FROM node:16-alpine3.11
+FROM node:18-alpine3.16
 
 WORKDIR /app
 
@@ -10,7 +10,11 @@ RUN apk add --no-cache \
     harfbuzz \
     ca-certificates \
     ttf-freefont \
-    imagemagick
+    imagemagick \
+    msttcorefonts-installer \
+    fontconfig && \
+    update-ms-fonts && \
+    fc-cache -f
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
